@@ -13,7 +13,7 @@ import (
 )
 
 // const for IP and URL RegEx
-const RegxIP = `([0-9]{0,3}\.){3}[0-9]{0,3}`
+const RegxIP = `^([0-9]{0,3}\.){3}[0-9]{0,3}`
 const RegxURL = `[GET|PUT|POST] (.*) HTTP`
 
 var reIP *regexp.Regexp

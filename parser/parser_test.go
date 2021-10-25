@@ -39,7 +39,7 @@ func TestParseLine(t *testing.T) {
 	}
 
 	ips := report.TopThreeIPs()
-	if ips[0].Key != "168.41.191.41" && ips[0].Key != "168.41.191.40" {
+	if !(ips[0].Key == "168.41.191.41" || ips[0].Key == "168.41.191.40") {
 		t.Errorf("IP should be one of %s or %s", "168.41.191.41", "168.41.191.40")
 	}
 
@@ -68,6 +68,16 @@ func TestParseLine(t *testing.T) {
 
 	if urls[0].Value != 2 {
 		t.Errorf("First URL count should be %d", 2)
+	}
+
+	// Should not parse the line
+	wg.Add(1)
+	guard <- true
+	line = `"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_7) AppleWebKit/534.24 (KHTML, like Gecko) RockMelt/0.9.58.494 Chrome/11.0.696.71 Safari/534.24"`
+	parseLine(line, 3, &report, &wg, &guard)
+
+	if report.NumUniqueIPs() != 2 {
+		t.Errorf("Number of unique IPs shuould be %d", 2)
 	}
 }
 
