@@ -14,11 +14,9 @@ func main() {
     if len(args) != 2 {
         log.Fatal("Usage `go run main.go [log_file]`")
     }
-
-    filename := args[1]
 	
     // Initialse the parser by passing the file path and max number of go routines
-    parser, err := parser.NewParser(filename, 30)
+    parser, err := parser.NewParser(args[1], 30)
     if err != nil {
         log.Fatalf("While creating parser: %s", err.Error())
     }

@@ -73,7 +73,7 @@ func TestParseLine(t *testing.T) {
 
 func BenchmarkParse(b *testing.B) {
 	
-    p, _ := NewParser("../access.log", 20)
+    p, _ := NewParser("../log/access.log", 20)
     for i := 0; i < b.N; i++ {
         _, err := p.Parse()
         log.Println(err)
